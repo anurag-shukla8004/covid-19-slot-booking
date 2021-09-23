@@ -98,7 +98,7 @@ input {
   overflow: hidden;
   width: 768px;
   min-height: 480px;
-  max-width: 100%;
+  max-width: auto;
 }
 
 .form-container {
@@ -231,6 +231,15 @@ input {
   body {
     font-size: x-small;
   }
+
+  .project-title {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    font-size: 34px;
+    color: #000;
+  }
+
   .login-btn {
     flex-direction: column;
   }
@@ -240,8 +249,11 @@ input {
 
   .form input,
   #form input {
-    width: 201px;
+    width: 126px;
     margin-bottom: 0px;
+  }
+  .form h1 {
+    font-size: 18px;
   }
 
   .container {
@@ -253,7 +265,7 @@ input {
     overflow: hidden;
     width: 768px;
     min-height: 410px;
-    max-width: 123%;
+    max-width: 98%;
   }
 }
 /* popup form */
