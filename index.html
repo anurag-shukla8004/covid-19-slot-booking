@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   
+    <link href="https://fonts.googleapis.com/css?family=Lato|Staatliches" rel="stylesheet">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -15,39 +18,34 @@
       href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+   
+    
     <title>Cowin</title>
     <link rel="stylesheet" href="app.css" />
     <link rel="stylesheet" href="booking.css" />
+    <link rel="stylesheet" href="adminpage.css">
+    
   </head>
   <body>
     <img
       src="https://www.health.state.mn.us/diseases/coronavirus/images/vaxicon.png"
       alt=""
       class="shadow-none project-title first"
+     
     />
 
-    <div class="container" id="container">
+    <div class="container" id="container" >
       <div class="col form-container sign-up-container">
         <form class="form" onsubmit="mySubmitFunction(event)">
           <h1>Start Booking Vaccination</h1>
-          <input class="lname" type="text" placeholder="Full Name" />
           <input class="lemail" type="email" placeholder="Email" />
-          <input class="lnumber" type="tel" placeholder="Mobile Number" />
           <input class="lpassword" type="password" placeholder="Password" />
           <p class="alert" style="display: none">
             plese enter a correct details
           </p>
 
           <div class="login-btn mt-4" style="display: flex">
-            <button onclick="login()" class="btn-login">USER</button>
-            <button class="btn-admin">ADMIN</button>
+            <button onclick="login()" class="btn-login">Log in</button>
           </div>
         </form>
       </div>
@@ -55,12 +53,23 @@
         <form class="form" onsubmit="mySubmitFunction(event)">
           <h1>Start Booking Vaccination</h1>
           <input class="sname" type="text" placeholder="Full Name" />
+          <span class="namealert" style="display: none;">Enter more than 2 character</span>
           <input class="semail" type="email" placeholder="Email" />
-          <input class="snumber" type="tel" placeholder="Mobile Number" />
-          <input class="spassword" type="password" placeholder="Password" />
+          <span class="emailalert1" style="display: none;">You have entered an invalid email address!</span>
+          <span class="emailalert2" style="display: none;">This email is already used enter a new email</span>
+          <div class="d-flex flex-row numberbox">
+            <input class="scode" type="tel"  placeholder="Mobile Number"  value="+91" disabled/>
+            <input class="snumber code" type="number" onclick="numberCode1()" placeholder="Mobile Number"/></div>
+          <span class="numberalert" style="display: none;">Enter 10 digit number start with 9,8,7 and 6</span>
+          <input  class="spassword" type="password" placeholder="Password" />
+          <span class="passwordalert" style="display: none;">Minimum 4 character</span>
+          <p class="loginAlert" style="display: none">
+            Fill all required fields
+          </p>
+          <p class="successsinup" style="display: none;">Create your account successful</p>
 
           <div class="login-btn mt-4">
-            <button onclick="store()" class="btn-login">Sign Up</button>
+            <button onclick="store()" onfocus="backCode()" class="btn-login">Sign Up</button>
           </div>
         </form>
       </div>
@@ -69,7 +78,7 @@
           <div class="overlay-panel overlay-left">
             <h1>Welcome</h1>
             <p>Log in the site and book Vaccination slot.</p>
-            <button class="ghost" id="signIn">Login</button>
+            <button class="ghost" onclick="backCode()" id="signIn">Login</button>
           </div>
           <div class="overlay-panel overlay-right">
             <h1>Welcome</h1>
@@ -79,7 +88,18 @@
         </div>
       </div>
     </div>
-<div id="web">
+
+    <!-- face second start -->
+<div id="web" >
+<!-- navbar start -->
+<div class=" d-flex flex-row justify-content-end ">
+  
+  <pre>
+ <input type="button" value="Logout" class="logout" onclick="logoutPage()"/>
+ </pre>
+</div>
+
+<!-- navbar end -->
     <header class=" section header">
       <div class=" header__col">
         <h1 class="title">Start Booking Vaccination</h1>
@@ -224,22 +244,142 @@ Though immunity through vaccination is expected to last up to nine months as
     <div id="popup">
      
        <form id="form"  onsubmit="mySubmitFunction(event)">
-        
-        <button onclick="hide()">CLOSE</button>
-        <h1>Start Booking Vaccination</h1>
+        <button onclick="hide()" onfocus="backCode()" >CLOSE</button>
+        <h1>Booking Slot</h1>
         <input class="fname" type="text" placeholder="Full Name" />
+        <span class="fnamealert" style="display: none;">Enter more than 2 character</span>
         <input class="femail" type="email" placeholder="Email" />
-        <input class="fnumber"type="tel" placeholder="Mobile Number" />
-        <input class="fadhar" type="tel" placeholder="12 digit adahar" />
+        <input class="fuseremail" type="email" placeholder="Email"  style="display: none;"/>
+        <span class="femailalert1" style="display: none;">Enter more than 1 character</span>
+        <span class="femailalert2" style="display: none;">Enter more than 2 character</span>
+        <div class="d-flex flex-row numberbox">
+          <input class="fcode" type="tel"  placeholder="Mobile Number" value="+91" disabled/>
+          <input class="fnumber code" type="number" onclick="numberCode2()" placeholder="Mobile Number"/></div>
+        <span class="fnumberalert"  style="display: none;">Enter more than 2 character</span>
+        <input class="fadhar"  type="number" placeholder="12 digit adahar" />
+        <span class="fadharalert" style="display: none;">Enter more than 2 character</span>
+        <p class="floginAlert" style="display: none">
+          Fill all required fields
+        </p>
+        <p class="fsuccesssinup" style="display: none;">Create your account successful</p>
 
         <div class="login-btn mt-4">
-          <button type="button" id="submit" onclick="add()"class="btn-login">Sign Up</button>
+          <button type="button" id="submit" onclick="add()" onfocus="backCode()" class="btn-login">Slot Book</button>
         </div>
       </form>
     </div>
+    <!-- face second end -->
+   
+    
+    <!-- face third start -->
+<div class="lbody d-flex" >
+  <div class="lcontent"  >
+   <nav class="ltitle" >
+     <div>
+       <h3 style="margin-bottom: 0px;">COVID-19</h3>
+     </div>
+     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item" href="#">Dashboard</a>
+      <a class="dropdown-item" href="#">Edit Profile</a>
+      <a class="dropdown-item" href="#">Log Out</a>
+    </div>
+  <div class="titlelogout">
+    <input type="button" value="Logout" class="logout" onclick="logoutPage()"/>
+    
+  </div>
+  </nav>
+
+
+  <!-- list  -->
+  <div class="mcontainer">
+   <div class="seleter">
+     <div class="card ">
+          <select class="form-control filter" id="selectBox" onchange="changeFunc();">
+              <option class="optionselector">All</option>
+          </select>
+           
+        </div>
+    <h2>Covid-19 booking managment </h2>
+   </div>
+      
+   
+    
+    <ul class="mresponsive-table">
+      <li class="mtable-header ">
+        <div class="col col-1">User Email</div>
+        <div class="col col-2">Name</div>
+        <div class="col col-3">Clint Email</div>
+        <div class="col col-4">Mobile no</div>
+        <div class="col col-4">Decleration</div>
+      </li>
+      <!-- <li class="mtable-row">
+        <div class="col col-1" data-label="Job Id">anuragshukla@gmail.com</div>
+        <div class="col col-2" data-label="Customer Name">Anurag shukla</div>
+        <div class="col col-3" data-label="Amount">harimmishra@gmail.com</div>
+        <div class="col col-4" data-label="Payment Status">8888888888</div>
+        <div class="col col-4" data-label="Payment Status">Pending</div>
+      </li> -->
+     
+
+    </ul>
+    <ul class="mresponsive-table" id="mresponsive-table">
+   
+    </ul>
+  </div>
+
+
+  <!-- pagination -->
+  <div class="pagination">
+    <ul class="pagination-2" id="pagination-2" >
+      
+    </ul>
+   </div>
+   <div id="lpopup">
+     
+    <form id="form"  onsubmit="mySubmitFunction(event)">
+     <button onclick="hide()" onfocus="backCode()" >CLOSE</button>
+     <h1>Slot Managment</h1>
+     <div class="d-flex">
+       <button class="accept" onclick="afterAccept()"> Accept</button>
+       <button class="reject" onclick="afterReject()">Reject</button>
+     </div>
+
+     <div class="afteraccept" style="display: none;"> 
+      <h6>Time and Date</h6>
+       <input type="date" class="slotdate"  name="birthdaytime">
+    <input type="time" class="slottime" name="birthdaytime">
+    </div>
+    <div class="afterreject" style="display: none;">
+      <h6>Rejection Region</h6>
+      <textarea id="textarea" class="rejectregionbox" rows="3"></textarea>
+    </div>
+
+    <p class="slotfieldalert" style="display: none;">Select the given field</p>
+    <p class="acceptfieldalert" style="display: none;">Enter the Date and Time</p>
+    <p class="rejectfieldalert" style="display: none;">Enter the Rejection Region</p>
+   
+    
   
 
+     <div class="login-btn mt-4">
+       <button type="button" id="submit" onclick="submitslot()" class="btn-login">Slot Book</button>
+     </div>
+   </form>
+   
+ </div>
+     </div>
+  </div>
+
+
+ 
+    
+
+ 
+
     <script src="loginpage.js"></script>
+    <script src="admin.js"></script>
+    
+   
     
   </body>
 </html>

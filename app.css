@@ -1,9 +1,15 @@
 .project-title {
   display: flex;
   justify-content: center;
-  margin: 30px;
+  margin: 0px;
   font-size: 34px;
   color: #000;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 body {
@@ -13,11 +19,12 @@ body {
   align-items: center;
   flex-direction: column;
   direction: ltl;
+  font-family: "Lato", sans sarif;
 }
 
 input,
 button {
-  cursor: pointer;
+  cursor: auto;
 }
 
 h1 {
@@ -82,14 +89,14 @@ form {
 }
 
 input {
-  background-color: #eee;
+  background-color: rgb(232, 240, 254);
   border: none;
   padding: 12px 15px;
   margin: 8px 0;
   width: 100%;
 }
 
-.container {
+#container {
   direction: ltr;
   background-color: #fff;
   border-radius: 10px;
@@ -204,14 +211,10 @@ input {
 }
 
 @media only screen and (max-width: 620px) {
-  .form input {
-    width: 220px;
-    margin-bottom: 0px;
-  }
   .login-btn {
     flex-direction: column;
   }
-  .container {
+  #container {
     direction: ltr;
     background-color: #fff;
     border-radius: 10px;
@@ -225,11 +228,16 @@ input {
   .btn-admin {
     margin-bottom: 20px;
   }
+  .fcode,
+  .scode {
+    display: none;
+    width: 56px !important;
+  }
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 476px) {
   body {
-    font-size: x-small;
+    font-size: xx-small;
   }
 
   .project-title {
@@ -249,14 +257,14 @@ input {
 
   .form input,
   #form input {
-    width: 126px;
     margin-bottom: 0px;
+    font-size: xx-small;
   }
   .form h1 {
     font-size: 18px;
   }
 
-  .container {
+  #container {
     direction: ltr;
     background-color: #fff;
     border-radius: 10px;
@@ -266,6 +274,11 @@ input {
     width: 768px;
     min-height: 410px;
     max-width: 98%;
+  }
+  .fcode,
+  .scode {
+    display: none;
+    width: 45px !important;
   }
 }
 /* popup form */
@@ -284,13 +297,12 @@ input {
   border: 1px solid #212121;
   border-radius: 2px;
   padding: 20px;
-  width: 400px;
+  width: 300px;
   left: 50%;
   top: 10%;
   margin-left: -150px;
 }
 input {
-  width: 300px;
   margin-bottom: 0px;
 }
 #close {
@@ -307,4 +319,14 @@ input {
 
 #web {
   display: none;
+}
+
+.button {
+  transition: 0.5s;
+}
+
+.fcode,
+.scode {
+  display: none;
+  width: 56px !important;
 }

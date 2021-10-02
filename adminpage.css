@@ -1,0 +1,310 @@
+input {
+  width: auto !important;
+}
+.onclick-menu {
+  color: aliceblue;
+  background: #333;
+  padding: 10px;
+  border: 1px solid;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.onclick-menu-content {
+  background-color: rgb(250, 250, 250);
+  pointer-events: none;
+}
+.onclick-menu-content li {
+  background-color: rgb(250, 250, 250);
+  color: #333;
+}
+.onclick-menu-content li button {
+  background-color: #333;
+  color: rgb(255, 255, 255);
+}
+.onclick-menu:before {
+  content: "click me!";
+}
+.onclick-menu:focus {
+  /* clicking on label should toggle the menu */
+  pointer-events: none;
+}
+.onclick-menu:focus .onclick-menu-content {
+  /*  opacity is 1 in opened state (see below) */
+  opacity: 1;
+  visibility: visible;
+
+  /* don't let pointer-events affect descendant elements */
+  pointer-events: auto;
+}
+.onclick-menu-content {
+  position: absolute;
+  z-index: 1;
+
+  /* use opacity to fake immediate toggle */
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.5s;
+}
+
+.lbody {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  margin: 0;
+  font-family: "Assistant", sans-serif;
+}
+
+.lcontent {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  display: none;
+  flex-direction: column;
+  margin-left: 20px;
+  border-radius: 7.5px;
+  overflow: hidden;
+  width: -webkit-fill-available;
+}
+
+/* navbar titile */
+.ltitle {
+  background-color: #555;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.titlelogout {
+  margin: 10px;
+}
+
+.ltitle div h3 {
+  color: #ffffff;
+}
+
+/* list item */
+
+.mcontainer {
+  width: -webkit-fill-available;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.mresponsive-table li {
+  border-radius: 3px;
+  padding: 7px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.mresponsive-table .mtable-header {
+  background-color: #95a5a6;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.mresponsive-table .mtable-row {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+  font-size: smaller;
+}
+.mresponsive-table .col-1 {
+  flex-basis: 24%;
+}
+.mresponsive-table .col-2 {
+  flex-basis: 15%;
+}
+.mresponsive-table .col-3 {
+  flex-basis: 24%;
+}
+.mresponsive-table .col-4 {
+  flex-basis: 25%;
+}
+.mresponsive-table .col-4 {
+  flex-basis: 12%;
+}
+@media only screen and (max-width: 767px) {
+  .mresponsive-table .mtable-header {
+    display: none;
+  }
+  .mresponsive-table li {
+    display: block;
+  }
+  .mresponsive-table .col {
+    flex-basis: 100%;
+  }
+  .mresponsive-table .col {
+    display: flex;
+    padding: 10px 0;
+  }
+  .mresponsive-table .col:before {
+    color: #6c7a89;
+    padding-right: 10px;
+    content: attr(data-label);
+    flex-basis: 50%;
+    text-align: right;
+  }
+}
+
+/* pagination start */
+/* General */
+body {
+  font-size: 16px;
+}
+
+.pagination ul {
+  margin: 2em auto;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.page-number {
+  display: inline;
+  cursor: pointer;
+  margin: 3px;
+  border: 1px solid #333;
+}
+
+.page-number a {
+  text-decoration: none;
+  color: black;
+  pointer-events: none;
+}
+
+/* Pagination 1 */
+.pagination-1 .page-number {
+  margin: 0.25em;
+}
+
+.pagination-1 .page-number a {
+  padding: 0.125em;
+}
+
+.pagination-1 .active a {
+  font-weight: bold;
+  border-bottom: 3px solid black;
+}
+
+.pagination-1 .prev,
+.pagination-1 .next {
+  text-transform: uppercase;
+}
+
+/* Pagination 2 */
+.pagination-2 .page-number {
+  padding: 6px 14px;
+  background-color: #f3f4f2;
+}
+
+.pagination-2 .page-number:hover {
+  background-color: rgb(129, 129, 129);
+}
+
+.pagination-2 .active {
+  border-radius: 4px;
+  background-color: #16425b;
+}
+
+.pagination-2 .active:hover {
+  background-color: #16425b;
+}
+
+.pagination-2 .active a {
+  color: #f3f4f2;
+}
+
+/* pagination end */
+
+select {
+  background-color: white;
+  /* inline SVG */
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20448%22%20enable-background%3D%22new%200%200%20256%20448%22%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E.arrow%7Bfill%3A%23424242%3B%7D%3C%2Fstyle%3E%3Cpath%20class%3D%22arrow%22%20d%3D%22M255.9%20168c0-4.2-1.6-7.9-4.8-11.2-3.2-3.2-6.9-4.8-11.2-4.8H16c-4.2%200-7.9%201.6-11.2%204.8S0%20163.8%200%20168c0%204.4%201.6%208.2%204.8%2011.4l112%20112c3.1%203.1%206.8%204.6%2011.2%204.6%204.4%200%208.2-1.5%2011.4-4.6l112-112c3-3.2%204.5-7%204.5-11.4z%22%2F%3E%3C%2Fsvg%3E%0A");
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: auto 50%;
+  border-radius: 2px;
+  border: none;
+  color: #ffffff;
+  padding: 10px 30px 10px 10px;
+
+  outline: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* styles for this pen, just to
+make this page look nice. */
+
+.card {
+  max-width: 300px;
+  margin: 17px;
+  border: none;
+}
+
+.seleter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-basis: 25%;
+}
+
+.mcontainer h2 {
+  flex-basis: 75%;
+}
+.filter {
+  width: 154%;
+}
+
+.pending {
+  background-color: rgb(243, 241, 237);
+  color: #333;
+}
+
+#lpopup {
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background-color: rgba(50, 50, 50, 0.9);
+}
+
+.accept {
+  background-color: green;
+}
+.accept:hover {
+  background-color: rgb(1, 158, 1);
+}
+
+.reject {
+  background-color: red;
+}
+.reject:hover {
+  background-color: rgb(209, 6, 6);
+}
+
+.afteraccept {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: rgba(194, 193, 193, 0.226);
+}
+.afterreject {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
