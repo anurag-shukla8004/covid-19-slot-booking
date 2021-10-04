@@ -38,6 +38,9 @@ function mySubmitFunction(e) {
 // ****************  Sign up page **********************
 let Data;
 let bookingData;
+let pageUpdateData;
+let bookingDataCopy;
+let currentStatus;
 
 // ***************** Data storage *****************
 
@@ -234,15 +237,22 @@ function login() {
       Alert.style.display = "none";
     }, 5000);
   }
+  // booking
   if (flag == 1) {
     container.style.display = "none";
     first.style.display = "none";
     web.style.display = "block";
+    pageUpdateData = "booking";
+    localStorage.setItem("pageUpdateData", JSON.stringify(pageUpdateData));
   }
+
+  // admin
   if (flag == 2) {
     container.style.display = "none";
     first.style.display = "none";
     lContent.style.display = "flex";
+    pageUpdateData = "admin";
+    localStorage.setItem("pageUpdateData", JSON.stringify(pageUpdateData));
     filter();
     firsttarget();
   }

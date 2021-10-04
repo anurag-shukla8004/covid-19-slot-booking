@@ -34,7 +34,7 @@
      
     />
 
-    <div class="container" id="container" >
+    <div  class="container" id="container" >
       <div class="col form-container sign-up-container">
         <form class="form" onsubmit="mySubmitFunction(event)">
           <h1>Start Booking Vaccination</h1>
@@ -295,7 +295,7 @@ Though immunity through vaccination is expected to last up to nine months as
    <div class="seleter">
      <div class="card ">
           <select class="form-control filter" id="selectBox" onchange="changeFunc();">
-              <option class="optionselector">All</option>
+              <!-- <option class="optionselector">All</option> -->
           </select>
            
         </div>
@@ -307,7 +307,7 @@ Though immunity through vaccination is expected to last up to nine months as
     <ul class="mresponsive-table">
       <li class="mtable-header ">
         <div class="col col-1">User Email</div>
-        <div class="col col-2">Name</div>
+        <div class="col col-2 d-flex" style="cursor: pointer;" onclick="this.children[0].classList.toggle('active'); sortName();">Name <div class="" style="pointer-events: none;" id="arrow-down" ></div></div>
         <div class="col col-3">Clint Email</div>
         <div class="col col-4">Mobile no</div>
         <div class="col col-4">Decleration</div>
@@ -357,6 +357,7 @@ Though immunity through vaccination is expected to last up to nine months as
     <p class="slotfieldalert" style="display: none;">Select the given field</p>
     <p class="acceptfieldalert" style="display: none;">Enter the Date and Time</p>
     <p class="rejectfieldalert" style="display: none;">Enter the Rejection Region</p>
+    <p class="successfieldalert" style="display: none;">Booking Details Submit</p>
    
     
   
@@ -369,17 +370,7 @@ Though immunity through vaccination is expected to last up to nine months as
  </div>
      </div>
   </div>
-
-
- 
-    
-
- 
-
     <script src="loginpage.js"></script>
     <script src="admin.js"></script>
-    
-   
-    
   </body>
 </html>
