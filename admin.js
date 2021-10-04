@@ -1,6 +1,7 @@
 const mTable = document.getElementById("mresponsive-table");
-const pagination2 = document.getElementById("pagination-2");
+// const mTableRow = document.querySelector(".mtable-row");
 
+const pagination2 = document.getElementById("pagination-2");
 const optionfilter = document.querySelector(".filter");
 const afteraccept = document.querySelector(".afteraccept");
 const afterreject = document.querySelector(".afterreject");
@@ -10,14 +11,16 @@ const rejectRegionBox = document.querySelector(".rejectregionbox");
 const slotFieldAlert = document.querySelector(".slotfieldalert");
 const acceptFieldAlert = document.querySelector(".acceptfieldalert");
 const rejectFieldAlert = document.querySelector(".rejectfieldalert");
+const successFieldAlert = document.querySelector(".successfieldalert");
 // const optionSelector = document.querySelector(".optionselector");
+const pendingform = document.getElementById("lpopup");
 
 pagination2.addEventListener("click", earsetarget);
 pagination2.addEventListener("click", target);
 // optionSelector.addEventListener("click", selector);
 
 const numberOfItems = bookingData.length;
-const numberPerPage = 5;
+const numberPerPage = 3;
 const currentPage = 1;
 const numberOfPages = Math.ceil(numberOfItems / numberPerPage);
 
@@ -28,6 +31,15 @@ for (var a = 1; a <= numberOfPages; a++) {
 }
 // pagination2.innerHTML += `<li class="page-number prev"><a href="#">&raquo;</a></li>`;
 
+// sort Name
+bookingDataCopy = [...bookingData];
+localStorage.setItem("bookingDataCopy", JSON.stringify(bookingDataCopy));
+bookingDataCopy.sort((a, b) => {
+  if (a.fName.toLowerCase() < b.fName.toLowerCase()) {
+    return -1;
+  }
+});
+
 function firsttarget() {
   var i = 1;
   const trimStart = (i - 1) * numberPerPage;
@@ -35,11 +47,11 @@ function firsttarget() {
 
   for (var j = trimStart; trimEnd > j; j++) {
     const tabelRow = ` <li class="mtable-row">
-    <div class="col col-1" data-label="Job Id">${bookingData[j].fUserEmail}</div>
-    <div class="col col-2" data-label="Customer Name">${bookingData[j].fName}</div>
-    <div class="col col-3" data-label="Amount">${bookingData[j].fEmail}</div>
-    <div class="col col-4" data-label="Payment Status">${bookingData[j].fNumber}</div>
-    <div class="col col-4" data-label="Payment Status"><button class="pending" value="${bookingData[j].fEmail}"  onclick="pending()">${bookingData[j].fStatus}</button></div>
+    <div class="col col-1" data-label="Job Id">${bookingDataCopy[j].fUserEmail}</div>
+    <div class="col col-2" data-label="Customer Name">${bookingDataCopy[j].fName}</div>
+    <div class="col col-3" data-label="Amount">${bookingDataCopy[j].fEmail}</div>
+    <div class="col col-4" data-label="Payment Status">${bookingDataCopy[j].fNumber}</div>
+    <div class="col col-4" data-label="Payment Status"><button class="pending" value="${bookingDataCopy[j].fEmail}" style="background: ${bookingDataCopy[j].color};"  onclick="pending()">${bookingDataCopy[j].fStatus}</button></div>
   </li>`;
     mTable.innerHTML += tabelRow;
   }
@@ -56,11 +68,11 @@ function target(e) {
 
   for (var j = trimStart; trimEnd > j; j++) {
     const tabelRow = ` <li class="mtable-row">
-  <div class="col col-1" data-label="Job Id">${bookingData[j].fUserEmail}</div>
-  <div class="col col-2" data-label="Customer Name">${bookingData[j].fName}</div>
-  <div class="col col-3" data-label="Amount">${bookingData[j].fEmail}</div>
-  <div class="col col-4" data-label="Payment Status">${bookingData[j].fNumber}</div>
-  <div class="col col-4" data-label="Payment Status"><button class="pending" value="${bookingData[j].fEmail}" onclick="pending()">${bookingData[j].fStatus}</button></div>
+  <div class="col col-1" data-label="Job Id">${bookingDataCopy[j].fUserEmail}</div>
+  <div class="col col-2" data-label="Customer Name">${bookingDataCopy[j].fName}</div>
+  <div class="col col-3" data-label="Amount">${bookingDataCopy[j].fEmail}</div>
+  <div class="col col-4" data-label="Payment Status">${bookingDataCopy[j].fNumber}</div>
+  <div class="col col-4" data-label="Payment Status"><button class="pending" value="${bookingDataCopy[j].fEmail}" style="background: ${bookingDataCopy[j].color};"  onclick="pending()">${bookingDataCopy[j].fStatus}</button></div>
 </li>`;
     mTable.innerHTML += tabelRow;
   }
@@ -71,6 +83,7 @@ function logoutPage() {
     container.style.display = "block";
     first.style.display = "block";
     lContent.style.display = "none";
+    optionfilter.innerHTML = "";
     earsetarget();
   }
 
@@ -79,9 +92,12 @@ function logoutPage() {
     first.style.display = "block";
     web.style.display = "none";
   }
+  localStorage.removeItem("pageUpdateData");
 }
 
 function filter() {
+  const option = `<option class="optionselector">All</option>`;
+  optionfilter.innerHTML += option;
   Data.map((value, index) => {
     const i = Data[index].sEmail;
     const option = `<option class="optionselector">${i}</option>`;
@@ -91,22 +107,23 @@ function filter() {
 
 function changeFunc() {
   earsetarget();
+
   let a = 0;
   var selectBox = document.getElementById("selectBox");
   var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-  bookingData.map((value, index) => {
-    if (bookingData[index].fEmail == selectedValue) {
+  bookingDataCopy.map((value, index) => {
+    if (bookingDataCopy[index].fEmail == selectedValue) {
       a = a + 1;
     }
   });
-  bookingData.map((value, index) => {
-    if (bookingData[index].fUserEmail == selectedValue) {
+  bookingDataCopy.map((value, index) => {
+    if (bookingDataCopy[index].fUserEmail == selectedValue) {
       const tabelRow = ` <li class="mtable-row">
-      <div class="col col-1" data-label="Job Id">${bookingData[index].fUserEmail}</div>
-      <div class="col col-2" data-label="Customer Name">${bookingData[index].fName}</div>
-      <div class="col col-3" data-label="Amount">${bookingData[index].fEmail}</div>
-      <div class="col col-4" data-label="Payment Status">${bookingData[index].fNumber}</div>
-      <div class="col col-4" data-label="Payment Status"> <button class="pending" value="${bookingData[index].fEmail}"  onclick="pending()>${bookingData[index].fStatus}</button></div>
+      <div class="col col-1" data-label="Job Id">${bookingDataCopy[index].fUserEmail}</div>
+      <div class="col col-2" data-label="Customer Name">${bookingDataCopy[index].fName}</div>
+      <div class="col col-3" data-label="Amount">${bookingDataCopy[index].fEmail}</div>
+      <div class="col col-4" data-label="Payment Status">${bookingDataCopy[index].fNumber}</div>
+      <div class="col col-4" data-label="Payment Status"><button class="pending" value="${bookingDataCopy[index].fEmail}" style="background: ${bookingDataCopy[index].color};"  onclick="pending()">${bookingDataCopy[index].fStatus}</button></div>
     </li>`;
       mTable.innerHTML += tabelRow;
     }
@@ -120,9 +137,11 @@ function changeFunc() {
 function pending() {
   const item = this.event.target;
   const val = item.attributes[1].value;
-  console.log(val);
-  const pendingform = document.getElementById("lpopup");
+  localStorage.setItem("currentStatus", val);
+
   pendingform.style.display = "block";
+  const get = localStorage.getItem("currentStatus");
+  item.parentElement.parentElement.setAttribute("value", val);
 }
 
 function afterAccept() {
@@ -134,7 +153,8 @@ function afterReject() {
   afterreject.style.display = "block";
 }
 
-function submitslot(e) {
+function submitslot() {
+  const changepending = document.querySelector(".pending");
   if (
     afteraccept.style.display == "none" &&
     afterreject.style.display == "none"
@@ -150,7 +170,39 @@ function submitslot(e) {
       afterreject.style.display == "none"
     ) {
       if (slotDate.value !== "" && slotTime.value !== "") {
-        statusUpdate();
+        // statusUpdate();
+        let Date = slotDate.value;
+        let Time = slotTime.value;
+        const currentEmail = localStorage.getItem("currentStatus");
+        console.log("afterAccept -->", currentEmail);
+        const updatedBookingData = bookingDataCopy.map((ele, index) => {
+          console.log("f", index);
+          if (ele.fEmail === currentEmail) {
+            const btnvalue = mTable.children[index].children[4].children[0];
+            btnvalue.style.background = "green";
+            btnvalue.innerText = "Accept";
+
+            return {
+              ...ele,
+              fStatus: "Accept",
+              color: "green",
+              bookedDate: Date,
+              bookedTime: Time,
+            };
+          }
+          bookingData = [...bookingDataCopy];
+          localStorage.setItem("bookingData", JSON.stringify(bookingData));
+          return ele;
+        });
+        localStorage.setItem(
+          "bookingDataCopy",
+          JSON.stringify(updatedBookingData)
+        );
+        successFieldAlert.style.display = "block";
+        setTimeout(() => {
+          successFieldAlert.style.display = "none";
+          pendingform.style.display = "none";
+        }, 2000);
       } else {
         acceptFieldAlert.style.display = "block";
         setTimeout(() => {
@@ -164,7 +216,34 @@ function submitslot(e) {
       afterreject.style.display == "block"
     ) {
       if (rejectRegionBox.value !== "") {
-        statusUpdate();
+        let region = rejectRegionBox.value;
+        const currentEmail = localStorage.getItem("currentStatus");
+        console.log("afterReject -->", currentEmail);
+        const updatedBookingData = bookingDataCopy.map((ele, index) => {
+          if (ele.fEmail === currentEmail) {
+            mTable.children[index].children[4].children[0].style.background =
+              "Red";
+            mTable.children[index].children[4].children[0].innerText = "Reject";
+
+            return {
+              ...ele,
+              fStatus: "Reject",
+              color: "Red",
+              region: region,
+            };
+          }
+          return ele;
+        });
+        localStorage.setItem(
+          "bookingDataCopy",
+          JSON.stringify(updatedBookingData)
+        );
+
+        successFieldAlert.style.display = "block";
+        setTimeout(() => {
+          successFieldAlert.style.display = "none";
+          pendingform.style.display = "none";
+        }, 2000);
       } else {
         rejectFieldAlert.style.display = "block";
         setTimeout(() => {
@@ -172,5 +251,47 @@ function submitslot(e) {
         }, 3000);
       }
     }
+  }
+  let cbr = [];
+  cbr = JSON.parse(localStorage.getItem("bookingDataCopy"));
+  localStorage.setItem("bookingData", JSON.stringify(cbr));
+}
+
+function sortName() {
+  const item = this.event.target;
+  if (item.children[0].classList == "active") {
+    bookingDataCopy = [...bookingData];
+    bookingDataCopy.sort((a, b) => {
+      if (a.fName.toLowerCase() > b.fName.toLowerCase()) {
+        return -1;
+      }
+    });
+    mTable.innerHTML = "";
+    firsttarget();
+    console.log("decending");
+  } else {
+    bookingDataCopy = [...bookingData];
+    bookingDataCopy.sort((a, b) => {
+      if (a.fName.toLowerCase() < b.fName.toLowerCase()) {
+        return -1;
+      }
+    });
+    mTable.innerHTML = "";
+    firsttarget();
+  }
+}
+
+if (localStorage.getItem("pageUpdateData")) {
+  if (localStorage.pageUpdateData.length == 9) {
+    container.style.display = "none";
+    first.style.display = "none";
+    web.style.display = "block";
+  }
+  if (localStorage.pageUpdateData.length == 7) {
+    container.style.display = "none";
+    first.style.display = "none";
+    lContent.style.display = "flex";
+    filter();
+    firsttarget();
   }
 }

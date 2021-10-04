@@ -308,3 +308,45 @@ make this page look nice. */
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+/* sort arrow css */
+#arrow-down {
+  width: 43px;
+  height: 0px;
+
+  position: relative;
+}
+
+#arrow-down:before,
+#arrow-down:after {
+  content: "";
+  display: block;
+  width: 15px;
+  height: 3px;
+  background: #333;
+  position: absolute;
+  top: 8px;
+  transition: transform 0.5s;
+}
+
+#arrow-down:before {
+  right: 21px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transform: rotate(45deg);
+}
+
+#arrow-down:after {
+  right: 11px;
+  transform: rotate(-45deg);
+}
+
+#arrow-down.active:before {
+  transform: rotate(-45deg);
+}
+
+#arrow-down.active:after {
+  transform: rotate(45deg);
+}
+
+/* sort arrow css end */
