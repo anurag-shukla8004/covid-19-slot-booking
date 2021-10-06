@@ -49,6 +49,8 @@ function firsttarget() {
   var i = 1;
   const trimStart = (i - 1) * numberPerPage;
   const trimEnd = trimStart + numberPerPage;
+  var bookingDataCopy = JSON.parse(localStorage.getItem("bookingData"));
+  localStorage.setItem("bookingDataCopy", JSON.stringify(bookingDataCopy));
 
   for (var j = trimStart; trimEnd > j; j++) {
     const tabelRow = ` <li class="mtable-row">
