@@ -150,6 +150,7 @@ function filter() {
   var option = `<option class="optionselector">All</option>`;
   optionfilter.innerHTML += option;
   let Data = JSON.parse(localStorage.getItem("Data"));
+  localStorage.setItem("Data", JSON.stringify(Data));
 
   Data.map((value, index) => {
     if (value.sStatus == "user") {
@@ -292,8 +293,7 @@ function changeFunc() {
   let a = 0;
   var selectBox = document.getElementById("selectBox");
   var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-  let booking = [];
-  booking = JSON.parse(localStorage.getItem("booking"));
+  var booking = JSON.parse(localStorage.getItem("bookingDataCopy"));
   booking.map((value, index) => {
     if (booking[index].fEmail == selectedValue) {
       a = a + 1;
