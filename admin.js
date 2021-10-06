@@ -152,9 +152,11 @@ function filter() {
   let Data = JSON.parse(localStorage.getItem("Data"));
 
   Data.map((value, index) => {
-    const i = Data[index].sEmail;
-    var option = `<option class="optionselector">${i}</option>`;
-    optionfilter.innerHTML += option;
+    if (value.sStatus == "user") {
+      const i = Data[index].sEmail;
+      var option = `<option class="optionselector">${i}</option>`;
+      optionfilter.innerHTML += option;
+    }
   });
 }
 
