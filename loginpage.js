@@ -17,6 +17,10 @@ const container = document.querySelector("#container");
 const web = document.querySelector("#web");
 const ghost = document.querySelector(".ghost");
 const lContent = document.querySelector(".lcontent");
+const userName = document.querySelector(".username");
+const userEmail = document.querySelector(".useremail");
+const adminName = document.querySelector(".adminname");
+const adminEmail = document.querySelector(".adminemail");
 // Element sign in
 const sinName = document.querySelector(".sname");
 const sinEmail = document.querySelector(".semail");
@@ -31,6 +35,13 @@ const fUserEmail = document.querySelector(".fuseremail");
 const fNumber = document.querySelector(".fnumber");
 const fAdhar = document.querySelector(".fadhar");
 const fcode = document.querySelector(".fcode");
+// element of profile edit
+const eName = document.querySelector(".ename");
+const eEmail = document.querySelector(".eemail");
+const eNumber = document.querySelector(".enumber");
+const eName2 = document.querySelector(".ename2");
+const eEmail2 = document.querySelector(".eemail2");
+const eNumber2 = document.querySelector(".enumber2");
 
 function mySubmitFunction(e) {
   e.preventDefault();
@@ -41,6 +52,8 @@ let bookingData;
 let pageUpdateData;
 let bookingDataCopy;
 let currentStatus;
+let nameEmail;
+let booking;
 
 // ***************** Data storage *****************
 
@@ -52,7 +65,7 @@ if (localStorage.getItem("Data")) {
     {
       sName: "harim",
       sEmail: "harim@gmail.com",
-      sNumber: "8004",
+      sNumber: "8004660767",
       sPassword: "harim",
       sStatus: "admin",
     },
@@ -206,31 +219,43 @@ function store() {
 function login() {
   const email = document.querySelector(".lemail").value;
   var password = document.querySelector(".lpassword").value;
-  fUserEmail.setAttribute("value", email);
-
+  DataCopy = [...Data];
+  console.log(DataCopy);
+  localStorage.setItem("DataCopy", JSON.stringify(DataCopy));
   var flag = 0;
-
-  for (i = 0; i <= Data.length - 1; i++) {
+  for (i = 0; i <= DataCopy.length - 1; i++) {
     if (
-      email == Data[i].sEmail &&
-      password == Data[i].sPassword &&
-      Data[i].sStatus == "admin"
+      email == DataCopy[i].sEmail &&
+      password == DataCopy[i].sPassword &&
+      DataCopy[i].sStatus == "admin"
     ) {
       flag = 2;
+      pne = {
+        pname: DataCopy[i].sName,
+        pemai: DataCopy[i].sEmail,
+      };
+      let profilename = [pne];
+      localStorage.setItem("nameEmail", JSON.stringify(profilename));
     }
   }
 
-  for (i = 0; i <= Data.length - 1; i++) {
+  for (i = 0; i <= DataCopy.length - 1; i++) {
     if (
-      email == Data[i].sEmail &&
-      password == Data[i].sPassword &&
-      Data[i].sStatus == "user"
+      email == DataCopy[i].sEmail &&
+      password == DataCopy[i].sPassword &&
+      DataCopy[i].sStatus == "user"
     ) {
       flag = 1;
+      pne = {
+        pname: DataCopy[i].sName,
+        pemai: DataCopy[i].sEmail,
+      };
+
+      let profilename = [pne];
+      localStorage.setItem("nameEmail", JSON.stringify(profilename));
     }
   }
   if (flag == 0) {
-    console.log("false");
     var Alert = document.querySelector(".alert");
     Alert.style.display = "block";
     setTimeout(function () {
@@ -244,6 +269,9 @@ function login() {
     web.style.display = "block";
     pageUpdateData = "booking";
     localStorage.setItem("pageUpdateData", JSON.stringify(pageUpdateData));
+    let str = JSON.parse(localStorage.getItem("nameEmail"));
+    userName.innerText = str[0].pname;
+    userEmail.innerText = str[0].pemai;
   }
 
   // admin
@@ -253,6 +281,9 @@ function login() {
     lContent.style.display = "flex";
     pageUpdateData = "admin";
     localStorage.setItem("pageUpdateData", JSON.stringify(pageUpdateData));
+    let str = JSON.parse(localStorage.getItem("nameEmail"));
+    adminName.innerText = str[0].pname;
+    adminEmail.innerText = str[0].pemai;
     filter();
     firsttarget();
   }
@@ -275,6 +306,8 @@ function show() {
 function hide() {
   document.getElementById("popup").style.display = "none";
   document.getElementById("lpopup").style.display = "none";
+  document.getElementById("editpopup").style.display = "none";
+  document.getElementById("editpopup2").style.display = "none";
   document.querySelector(".fname").value = "";
   document.querySelector(".femail").value = "";
   document.querySelector(".fnumber").value = "";
@@ -334,11 +367,14 @@ function add() {
     // femail
     if (fEmail.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
       let fcheck = true;
-      bookingData.map((arr) => {
-        if (arr.fsEmail == fEmail.value) {
-          fcheck = false;
-        }
-      });
+      if (localStorage.getItem("bookingData") !== []) {
+        bookingData.map((arr) => {
+          if (arr.fsEmail == fEmail.value) {
+            fcheck = false;
+          }
+        });
+      }
+
       if (fcheck == true) {
         fcheckEmail = true;
       } else {
@@ -399,10 +435,11 @@ function add() {
     fcheckNumber == true &&
     fcheckAdhar == true
   ) {
+    let str = JSON.parse(localStorage.getItem("nameEmail"));
     fomeData = {
       fName: document.querySelector(".fname").value,
       fEmail: document.querySelector(".femail").value,
-      fUserEmail: fUserEmail.value,
+      fUserEmail: str[0].pemai,
       fNumber: document.querySelector(".fnumber").value,
       fAdhar: document.querySelector(".fadhar").value,
       fStatus: "pending",
@@ -425,5 +462,7 @@ function add() {
     document.querySelector(".femail").value = "";
     document.querySelector(".fnumber").value = "";
     document.querySelector(".fadhar").value = "";
+    bookingDataCopy = [...bookingData];
+    localStorage.setItem("bookingDataCopy", JSON.stringify(bookingDataCopy));
   }
 }
