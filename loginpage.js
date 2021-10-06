@@ -38,10 +38,10 @@ const fcode = document.querySelector(".fcode");
 // element of profile edit
 const eName = document.querySelector(".ename");
 const eEmail = document.querySelector(".eemail");
-const eNumber = document.querySelector(".enumber");
+const ePassword = document.querySelector(".epassword");
 const eName2 = document.querySelector(".ename2");
 const eEmail2 = document.querySelector(".eemail2");
-const eNumber2 = document.querySelector(".enumber2");
+const ePassword2 = document.querySelector(".epassword2");
 
 function mySubmitFunction(e) {
   e.preventDefault();
@@ -219,8 +219,7 @@ function store() {
 function login() {
   const email = document.querySelector(".lemail").value;
   var password = document.querySelector(".lpassword").value;
-  DataCopy = [...Data];
-  console.log(DataCopy);
+  var DataCopy = JSON.parse(localStorage.getItem("Data"));
   localStorage.setItem("DataCopy", JSON.stringify(DataCopy));
   var flag = 0;
   for (i = 0; i <= DataCopy.length - 1; i++) {

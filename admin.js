@@ -391,10 +391,10 @@ function editpopup() {
     if (value.sEmail == str[0].pemai) {
       document.querySelector(".ename").value = value.sName;
       document.querySelector(".eemail").value = value.sEmail;
-      document.querySelector(".enumber").value = value.sNumber;
+      document.querySelector(".epassword").value = value.sPassword;
       document.querySelector(".ename2").value = value.sName;
       document.querySelector(".eemail2").value = value.sEmail;
-      document.querySelector(".enumber2").value = value.sNumber;
+      document.querySelector(".epassword2").value = value.sPassword;
     }
   });
 }
@@ -403,11 +403,11 @@ function editProfile() {
   let count = 0;
   let fcheckName;
   let fcheckEmail;
-  let fcheckNumber;
+  let fcheckPassword;
   if (
     eName.value.length !== 0 &&
     eEmail.value.length !== 0 &&
-    eNumber.value.length !== 0
+    ePassword.value.length !== 0
   ) {
     //  fName
     if (eName.value.length > 2) {
@@ -454,19 +454,15 @@ function editProfile() {
       }, 3000);
     }
 
-    // Mobile Numebr
-    if (
-      eNumber.value.match(/^\d{10}$/) &&
-      eNumber.value.match(/^(9|8|7|6)\d{9}$/)
-    ) {
-      fcheckNumber = true;
+    // Password
+    if (ePassword.value.length > 3) {
+      fcheckPassword = true;
     } else {
-      fcheckNumber = false;
-
-      let fnumberAlert = document.querySelector(".enumberalert");
-      fnumberAlert.style.display = "block";
+      fcheckPassword = false;
+      let passwordAlert = document.querySelector(".epasswordalert");
+      passwordAlert.style.display = "block";
       setTimeout(function () {
-        fnumberAlert.style.display = "none";
+        passwordAlert.style.display = "none";
       }, 3000);
     }
   } else {
@@ -478,10 +474,10 @@ function editProfile() {
     }, 3000);
   }
 
-  if (fcheckName == true && fcheckEmail == true && fcheckNumber == true) {
+  if (fcheckName == true && fcheckEmail == true && fcheckPassword == true) {
     let newName = document.querySelector(".ename").value;
     let newEmail = document.querySelector(".eemail").value;
-    let newNumber = document.querySelector(".enumber").value;
+    let newPassword = document.querySelector(".epassword").value;
 
     let str = JSON.parse(localStorage.getItem("nameEmail"));
 
@@ -504,7 +500,7 @@ function editProfile() {
           ...ele,
           sEmail: newEmail,
           sName: newName,
-          sNumber: newNumber,
+          sPassword: newPassword,
         };
       }
       return ele;
@@ -528,7 +524,7 @@ function editProfile() {
     userEmail.innerText = str[0].pemai;
     document.querySelector(".ename").value = newName;
     document.querySelector(".eemail").value = newEmail;
-    document.querySelector(".enumber").value = newNumber;
+    document.querySelector(".epassword").value = newPassword;
     localStorage.setItem("bookingDataCopy", JSON.stringify(bookingData));
     localStorage.setItem("booking", JSON.stringify(bookingDataCopy));
     var data = JSON.parse(localStorage.getItem("Data"));
@@ -541,11 +537,11 @@ function editProfile2() {
   let count = 0;
   let fcheckName;
   let fcheckEmail;
-  let fcheckNumber;
+  let fcheckPassword;
   if (
     eName2.value.length !== 0 &&
     eEmail2.value.length !== 0 &&
-    eNumber2.value.length !== 0
+    ePassword2.value.length !== 0
   ) {
     //  fName
     if (eName2.value.length > 2) {
@@ -592,19 +588,15 @@ function editProfile2() {
       }, 3000);
     }
 
-    // Mobile Numebr
-    if (
-      eNumber2.value.match(/^\d{10}$/) &&
-      eNumber2.value.match(/^(9|8|7|6)\d{9}$/)
-    ) {
-      fcheckNumber = true;
+    // Password
+    if (ePassword2.value.length > 3) {
+      fcheckPassword = true;
     } else {
-      fcheckNumber = false;
-
-      let fnumberAlert = document.querySelector(".enumberalert2");
-      fnumberAlert.style.display = "block";
+      fcheckPassword = false;
+      let passwordAlert = document.querySelector(".epasswordalert2");
+      passwordAlert.style.display = "block";
       setTimeout(function () {
-        fnumberAlert.style.display = "none";
+        passwordAlert.style.display = "none";
       }, 3000);
     }
   } else {
@@ -616,10 +608,10 @@ function editProfile2() {
     }, 3000);
   }
 
-  if (fcheckName == true && fcheckEmail == true && fcheckNumber == true) {
+  if (fcheckName == true && fcheckEmail == true && fcheckPassword == true) {
     let newName = document.querySelector(".ename2").value;
     let newEmail = document.querySelector(".eemail2").value;
-    let newNumber = document.querySelector(".enumber2").value;
+    let newPassword2 = document.querySelector(".epassword2").value;
 
     let str = JSON.parse(localStorage.getItem("nameEmail"));
 
@@ -642,7 +634,7 @@ function editProfile2() {
           ...ele,
           sEmail: newEmail,
           sName: newName,
-          sNumber: newNumber,
+          sPassword: newPassword2,
         };
       }
       return ele;
@@ -668,7 +660,7 @@ function editProfile2() {
     adminEmail.innerText = str[0].pemai;
     document.querySelector(".ename").value = newName;
     document.querySelector(".eemail").value = newEmail;
-    document.querySelector(".enumber").value = newNumber;
+    document.querySelector(".epassword2").value = newPassword2;
     localStorage.setItem("bookingDataCopy", JSON.stringify(bookingData));
     localStorage.setItem("booking", JSON.stringify(bookingDataCopy));
     filter();
