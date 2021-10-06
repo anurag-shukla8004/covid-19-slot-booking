@@ -1,4 +1,9 @@
 const mTable = document.getElementById("mresponsive-table");
+const mTableDetails = document.getElementById("mresponsive-tableDetails");
+const editPopup = document.getElementById("editpopup");
+const editPopup2 = document.getElementById("editpopup2");
+const arrowDown = document.getElementById("arrow-down");
+const SlotDetails = document.getElementById("slotdetails");
 // const mTableRow = document.querySelector(".mtable-row");
 
 const pagination2 = document.getElementById("pagination-2");
@@ -20,7 +25,7 @@ pagination2.addEventListener("click", target);
 // optionSelector.addEventListener("click", selector);
 
 const numberOfItems = bookingData.length;
-const numberPerPage = 3;
+const numberPerPage = 5;
 const currentPage = 1;
 const numberOfPages = Math.ceil(numberOfItems / numberPerPage);
 
@@ -55,6 +60,27 @@ function firsttarget() {
   </li>`;
     mTable.innerHTML += tabelRow;
   }
+}
+
+function slotDetails() {
+  mTableDetails.innerHTML = "";
+  web.style.display = "none";
+  SlotDetails.style.display = "block";
+  var bookingDataCopy = JSON.parse(localStorage.getItem("bookingDataCopy"));
+  var str = JSON.parse(localStorage.getItem("nameEmail"));
+  console.log(Data);
+  bookingDataCopy.map((value) => {
+    if (str[0].pemai == value.fUserEmail) {
+      const tabelRow = ` <li class="mtable-row">
+    <div class="col col-1" data-label="Job Id">${value.fUserEmail}</div>
+    <div class="col col-2" data-label="Customer Name">${value.fName}</div>
+    <div class="col col-3" data-label="Amount">${value.fEmail}</div>
+    <div class="col col-4" data-label="Payment Status">${value.fNumber}</div>
+    <div class="col col-4" data-label="Payment Status"><button class="pending" value="${value.fEmail}" style="background: ${value.color};"  onclick="pending()">${value.fStatus}</button></div>
+  </li>`;
+      mTableDetails.innerHTML += tabelRow;
+    }
+  });
 }
 
 function earsetarget() {
@@ -96,42 +122,16 @@ function logoutPage() {
 }
 
 function filter() {
-  const option = `<option class="optionselector">All</option>`;
+  optionfilter.innerHTML = "";
+  var option = `<option class="optionselector">All</option>`;
   optionfilter.innerHTML += option;
+  let Data = JSON.parse(localStorage.getItem("Data"));
+
   Data.map((value, index) => {
     const i = Data[index].sEmail;
-    const option = `<option class="optionselector">${i}</option>`;
+    var option = `<option class="optionselector">${i}</option>`;
     optionfilter.innerHTML += option;
   });
-}
-
-function changeFunc() {
-  earsetarget();
-
-  let a = 0;
-  var selectBox = document.getElementById("selectBox");
-  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-  bookingDataCopy.map((value, index) => {
-    if (bookingDataCopy[index].fEmail == selectedValue) {
-      a = a + 1;
-    }
-  });
-  bookingDataCopy.map((value, index) => {
-    if (bookingDataCopy[index].fUserEmail == selectedValue) {
-      const tabelRow = ` <li class="mtable-row">
-      <div class="col col-1" data-label="Job Id">${bookingDataCopy[index].fUserEmail}</div>
-      <div class="col col-2" data-label="Customer Name">${bookingDataCopy[index].fName}</div>
-      <div class="col col-3" data-label="Amount">${bookingDataCopy[index].fEmail}</div>
-      <div class="col col-4" data-label="Payment Status">${bookingDataCopy[index].fNumber}</div>
-      <div class="col col-4" data-label="Payment Status"><button class="pending" value="${bookingDataCopy[index].fEmail}" style="background: ${bookingDataCopy[index].color};"  onclick="pending()">${bookingDataCopy[index].fStatus}</button></div>
-    </li>`;
-      mTable.innerHTML += tabelRow;
-    }
-  });
-  if (selectedValue == "All") {
-    earsetarget();
-    firsttarget();
-  }
 }
 
 function pending() {
@@ -257,28 +257,398 @@ function submitslot() {
   localStorage.setItem("bookingData", JSON.stringify(cbr));
 }
 
+function changeFunc() {
+  earsetarget();
+
+  let a = 0;
+  var selectBox = document.getElementById("selectBox");
+  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+  let booking = [];
+  booking = JSON.parse(localStorage.getItem("booking"));
+  booking.map((value, index) => {
+    if (booking[index].fEmail == selectedValue) {
+      a = a + 1;
+    }
+  });
+  localStorage.setItem("booking", JSON.stringify(booking));
+  booking = JSON.parse(localStorage.getItem("booking"));
+  booking.map((value, index) => {
+    if (booking[index].fUserEmail == selectedValue) {
+      const tabelRow = ` <li class="mtable-row">
+      <div class="col col-1" data-label="Job Id">${booking[index].fUserEmail}</div>
+      <div class="col col-2" data-label="Customer Name">${booking[index].fName}</div>
+      <div class="col col-3" data-label="Amount">${booking[index].fEmail}</div>
+      <div class="col col-4" data-label="Payment Status">${booking[index].fNumber}</div>
+      <div class="col col-4" data-label="Payment Status"><button class="pending" value="${booking[index].fEmail}" style="background: ${booking[index].color};"  onclick="pending()">${booking[index].fStatus}</button></div>
+    </li>`;
+      mTable.innerHTML += tabelRow;
+    }
+  });
+  if (selectedValue == "All") {
+    localStorage.setItem("booking", JSON.stringify(bookingDataCopy));
+
+    if (arrowDown.classList == "active") {
+      console.log("success");
+      booking.sort((a, b) => {
+        if (a.fName.toLowerCase() > b.fName.toLowerCase()) {
+          return -1;
+        }
+      });
+      mTable.innerHTML = "";
+      localStorage.setItem("booking", JSON.stringify(booking));
+    }
+    booking = JSON.parse(localStorage.getItem("booking"));
+    booking.map((value, index) => {
+      const tabelRow = ` <li class="mtable-row">
+        <div class="col col-1" data-label="Job Id">${booking[index].fUserEmail}</div>
+        <div class="col col-2" data-label="Customer Name">${booking[index].fName}</div>
+        <div class="col col-3" data-label="Amount">${booking[index].fEmail}</div>
+        <div class="col col-4" data-label="Payment Status">${booking[index].fNumber}</div>
+        <div class="col col-4" data-label="Payment Status"><button class="pending" value="${booking[index].fEmail}" style="background: ${booking[index].color};"  onclick="pending()">${booking[index].fStatus}</button></div>
+      </li>`;
+      mTable.innerHTML += tabelRow;
+      // localStorage.setItem("booking", JSON.stringify(bookingDataCopy));
+    });
+  }
+}
+
 function sortName() {
   const item = this.event.target;
-  if (item.children[0].classList == "active") {
-    bookingDataCopy = [...bookingData];
-    bookingDataCopy.sort((a, b) => {
+  var selectBox = document.getElementById("selectBox");
+  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+
+  if (selectedValue !== "All") {
+    var sort = bookingDataCopy.filter((value) => {
+      if (value.fUserEmail == selectedValue) {
+        return value;
+      }
+    });
+    localStorage.setItem("booking", JSON.stringify(sort));
+  } else {
+    localStorage.setItem("booking", JSON.stringify(bookingDataCopy));
+  }
+  let booking = [];
+  booking = JSON.parse(localStorage.getItem("booking"));
+
+  if (arrowDown.classList == "active") {
+    console.log("success");
+    booking.sort((a, b) => {
       if (a.fName.toLowerCase() > b.fName.toLowerCase()) {
         return -1;
       }
     });
     mTable.innerHTML = "";
-    firsttarget();
+    localStorage.setItem("booking", JSON.stringify(booking));
+    changeFunc();
     console.log("decending");
   } else {
-    bookingDataCopy = [...bookingData];
-    bookingDataCopy.sort((a, b) => {
+    booking.sort((a, b) => {
       if (a.fName.toLowerCase() < b.fName.toLowerCase()) {
         return -1;
       }
     });
     mTable.innerHTML = "";
-    firsttarget();
+    localStorage.setItem("booking", JSON.stringify(booking));
+    changeFunc();
   }
+}
+
+function editpopup() {
+  editPopup.style.display = "block";
+  editPopup2.style.display = "block";
+  let str = JSON.parse(localStorage.getItem("nameEmail"));
+  let dta = JSON.parse(localStorage.getItem("Data"));
+  dta.map((value) => {
+    if (value.sEmail == str[0].pemai) {
+      document.querySelector(".ename").value = value.sName;
+      document.querySelector(".eemail").value = value.sEmail;
+      document.querySelector(".enumber").value = value.sNumber;
+      document.querySelector(".ename2").value = value.sName;
+      document.querySelector(".eemail2").value = value.sEmail;
+      document.querySelector(".enumber2").value = value.sNumber;
+    }
+  });
+}
+
+function editProfile() {
+  let count = 0;
+  let fcheckName;
+  let fcheckEmail;
+  let fcheckNumber;
+  if (
+    eName.value.length !== 0 &&
+    eEmail.value.length !== 0 &&
+    eNumber.value.length !== 0
+  ) {
+    //  fName
+    if (eName.value.length > 2) {
+      fcheckName = true;
+    } else {
+      fcheckName = false;
+      let fnameAlert = document.querySelector(".enamealert");
+      fnameAlert.style.display = "block";
+      setTimeout(function () {
+        fnameAlert.style.display = "none";
+      }, 3000);
+    }
+
+    // femail
+    if (eEmail.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+      let fcheck = true;
+      let str = JSON.parse(localStorage.getItem("nameEmail"));
+      Data.map((arr) => {
+        if (arr.sEmail == eEmail.value) {
+          fcheck = false;
+          console.log("false");
+        }
+      });
+      if (str[0].pemai == eEmail.value) {
+        fcheck = true;
+        console.log("true");
+      }
+      if (fcheck == true) {
+        fcheckEmail = true;
+      } else {
+        fcheckEmail = false;
+        let femailAlert2 = document.querySelector(".eemailalert2");
+        femailAlert2.style.display = "block";
+        setTimeout(function () {
+          femailAlert2.style.display = "none";
+        }, 3000);
+      }
+    } else {
+      checkEmail = false;
+      let femailAlert1 = document.querySelector(".eemailalert1");
+      femailAlert1.style.display = "block";
+      setTimeout(function () {
+        femailAlert1.style.display = "none";
+      }, 3000);
+    }
+
+    // Mobile Numebr
+    if (
+      eNumber.value.match(/^\d{10}$/) &&
+      eNumber.value.match(/^(9|8|7|6)\d{9}$/)
+    ) {
+      fcheckNumber = true;
+    } else {
+      fcheckNumber = false;
+
+      let fnumberAlert = document.querySelector(".enumberalert");
+      fnumberAlert.style.display = "block";
+      setTimeout(function () {
+        fnumberAlert.style.display = "none";
+      }, 3000);
+    }
+  } else {
+    checkPassword = false;
+    let floginAlert = document.querySelector(".eloginAlert");
+    floginAlert.style.display = "block";
+    setTimeout(function () {
+      floginAlert.style.display = "none";
+    }, 3000);
+  }
+
+  if (fcheckName == true && fcheckEmail == true && fcheckNumber == true) {
+    let newName = document.querySelector(".ename").value;
+    let newEmail = document.querySelector(".eemail").value;
+    let newNumber = document.querySelector(".enumber").value;
+
+    let str = JSON.parse(localStorage.getItem("nameEmail"));
+
+    const bookData = bookingData.map((ele, index) => {
+      if (ele.fUserEmail == str[0].pemai) {
+        return {
+          ...ele,
+          fUserEmail: newEmail,
+        };
+      }
+      return ele;
+    });
+
+    localStorage.setItem("bookingData", JSON.stringify(bookData));
+
+    const updatedData = Data.map((ele, index) => {
+      if (ele.sEmail == str[0].pemai) {
+        console.log("end");
+        return {
+          ...ele,
+          sEmail: newEmail,
+          sName: newName,
+          sNumber: newNumber,
+        };
+      }
+      return ele;
+    });
+    localStorage.setItem("Data", JSON.stringify(updatedData));
+
+    let fsuccessSinup = document.querySelector(".esuccesssinup");
+    fsuccessSinup.style.display = "block";
+    setTimeout(function () {
+      fsuccessSinup.style.display = "none";
+      hide();
+    }, 2000);
+    pne = {
+      pname: newName,
+      pemai: newEmail,
+    };
+    let profilename = [pne];
+    localStorage.setItem("nameEmail", JSON.stringify(profilename));
+    str = JSON.parse(localStorage.getItem("nameEmail"));
+    userName.innerText = str[0].pname;
+    userEmail.innerText = str[0].pemai;
+    document.querySelector(".ename").value = newName;
+    document.querySelector(".eemail").value = newEmail;
+    document.querySelector(".enumber").value = newNumber;
+    localStorage.setItem("bookingDataCopy", JSON.stringify(bookingData));
+    localStorage.setItem("booking", JSON.stringify(bookingDataCopy));
+    var data = JSON.parse(localStorage.getItem("Data"));
+    localStorage.setItem("DataCopy", JSON.stringify(data));
+    filter();
+  }
+}
+
+function editProfile2() {
+  let count = 0;
+  let fcheckName;
+  let fcheckEmail;
+  let fcheckNumber;
+  if (
+    eName2.value.length !== 0 &&
+    eEmail2.value.length !== 0 &&
+    eNumber2.value.length !== 0
+  ) {
+    //  fName
+    if (eName2.value.length > 2) {
+      fcheckName = true;
+    } else {
+      fcheckName = false;
+      let fnameAlert = document.querySelector(".enamealert2");
+      fnameAlert.style.display = "block";
+      setTimeout(function () {
+        fnameAlert.style.display = "none";
+      }, 3000);
+    }
+
+    // femail
+    if (eEmail2.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+      let fcheck = true;
+      let str = JSON.parse(localStorage.getItem("nameEmail"));
+      Data.map((arr) => {
+        if (arr.sEmail == eEmail2.value) {
+          fcheck = false;
+          console.log("false");
+        }
+      });
+      if (str[0].pemai == eEmail2.value) {
+        fcheck = true;
+        console.log("true");
+      }
+      if (fcheck == true) {
+        fcheckEmail = true;
+      } else {
+        fcheckEmail = false;
+        let femailAlert2 = document.querySelector(".femailalert2");
+        femailAlert2.style.display = "block";
+        setTimeout(function () {
+          femailAlert2.style.display = "none";
+        }, 3000);
+      }
+    } else {
+      checkEmail = false;
+      let femailAlert1 = document.querySelector(".eemailalert12");
+      femailAlert1.style.display = "block";
+      setTimeout(function () {
+        femailAlert1.style.display = "none";
+      }, 3000);
+    }
+
+    // Mobile Numebr
+    if (
+      eNumber2.value.match(/^\d{10}$/) &&
+      eNumber2.value.match(/^(9|8|7|6)\d{9}$/)
+    ) {
+      fcheckNumber = true;
+    } else {
+      fcheckNumber = false;
+
+      let fnumberAlert = document.querySelector(".enumberalert2");
+      fnumberAlert.style.display = "block";
+      setTimeout(function () {
+        fnumberAlert.style.display = "none";
+      }, 3000);
+    }
+  } else {
+    checkPassword = false;
+    let floginAlert = document.querySelector(".eloginAlert2");
+    floginAlert.style.display = "block";
+    setTimeout(function () {
+      floginAlert.style.display = "none";
+    }, 3000);
+  }
+
+  if (fcheckName == true && fcheckEmail == true && fcheckNumber == true) {
+    let newName = document.querySelector(".ename2").value;
+    let newEmail = document.querySelector(".eemail2").value;
+    let newNumber = document.querySelector(".enumber2").value;
+
+    let str = JSON.parse(localStorage.getItem("nameEmail"));
+
+    const bookData = bookingData.map((ele, index) => {
+      if (ele.fUserEmail == str[0].pemai) {
+        return {
+          ...ele,
+          fUserEmail: newEmail,
+        };
+      }
+      return ele;
+    });
+    console.log(bookingData);
+    localStorage.setItem("bookingData", JSON.stringify(bookData));
+
+    const updatedData = Data.map((ele, index) => {
+      if (ele.sEmail == str[0].pemai) {
+        console.log("end");
+        return {
+          ...ele,
+          sEmail: newEmail,
+          sName: newName,
+          sNumber: newNumber,
+        };
+      }
+      return ele;
+    });
+    localStorage.setItem("Data", JSON.stringify(updatedData));
+    let data = JSON.parse(localStorage.getItem("Data"));
+    localStorage.setItem("DataCopy", JSON.stringify(data));
+
+    let fsuccessSinup = document.querySelector(".fsuccesssinup");
+    fsuccessSinup.style.display = "block";
+    setTimeout(function () {
+      fsuccessSinup.style.display = "none";
+      hide();
+    }, 2000);
+    pne = {
+      pname: newName,
+      pemai: newEmail,
+    };
+    let profilename = [pne];
+    localStorage.setItem("nameEmail", JSON.stringify(profilename));
+    str = JSON.parse(localStorage.getItem("nameEmail"));
+    adminName.innerText = str[0].pname;
+    adminEmail.innerText = str[0].pemai;
+    document.querySelector(".ename").value = newName;
+    document.querySelector(".eemail").value = newEmail;
+    document.querySelector(".enumber").value = newNumber;
+    localStorage.setItem("bookingDataCopy", JSON.stringify(bookingData));
+    localStorage.setItem("booking", JSON.stringify(bookingDataCopy));
+    filter();
+  }
+}
+
+function Closeslot() {
+  web.style.display = "block";
+  SlotDetails.style.display = "none";
 }
 
 if (localStorage.getItem("pageUpdateData")) {
@@ -286,11 +656,17 @@ if (localStorage.getItem("pageUpdateData")) {
     container.style.display = "none";
     first.style.display = "none";
     web.style.display = "block";
+    let str = JSON.parse(localStorage.getItem("nameEmail"));
+    userName.innerText = str[0].pname;
+    userEmail.innerText = str[0].pemai;
   }
   if (localStorage.pageUpdateData.length == 7) {
     container.style.display = "none";
     first.style.display = "none";
     lContent.style.display = "flex";
+    let str = JSON.parse(localStorage.getItem("nameEmail"));
+    adminName.innerText = str[0].pname;
+    adminEmail.innerText = str[0].pemai;
     filter();
     firsttarget();
   }
