@@ -93,6 +93,16 @@ function slotDetails() {
   </li>`;
         mTableDetails.innerHTML += tabelRow;
       }
+      if (!value.region && !value.bookedTime) {
+        const tabelRow = ` <li class="mtable-row">
+    <div class="col col-1" data-label="Job Id">${value.fEmail}</div>
+    <div class="col col-2" data-label="Customer Name">${value.fName}</div>
+    <div class="col col-3" data-label="Amount">${value.fNumber}</div>
+    // <div class="col col-4" data-label="Payment Status">Pending</div>
+    <div class="col col-4" data-label="Payment Status"><button class="pending" value="${value.fEmail}" style="background: ${value.color};"  onclick="pending()">${value.fStatus}</button></div>
+  </li>`;
+        mTableDetails.innerHTML += tabelRow;
+      }
     }
   });
 }
@@ -269,6 +279,9 @@ function submitslot() {
   let cbr = [];
   cbr = JSON.parse(localStorage.getItem("bookingDataCopy"));
   localStorage.setItem("bookingData", JSON.stringify(cbr));
+  slotTime.value = "";
+  slotDate.value = "";
+  rejectRegionBox.value = "";
 }
 
 function changeFunc() {
