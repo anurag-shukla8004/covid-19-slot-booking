@@ -73,14 +73,26 @@ function slotDetails() {
   console.log(Data);
   bookingDataCopy.map((value) => {
     if (str[0].pemai == value.fUserEmail) {
-      const tabelRow = ` <li class="mtable-row">
-    <div class="col col-1" data-label="Job Id">${value.fUserEmail}</div>
+      if (value.bookedTime) {
+        const tabelRow = ` <li class="mtable-row">
+    <div class="col col-1" data-label="Job Id">${value.fEmail}</div>
     <div class="col col-2" data-label="Customer Name">${value.fName}</div>
-    <div class="col col-3" data-label="Amount">${value.fEmail}</div>
-    <div class="col col-4" data-label="Payment Status">${value.fNumber}</div>
+    <div class="col col-3" data-label="Amount">${value.fNumber}</div>
+    <div class="col col-4" data-label="Payment Status">${value.bookedDate}  ${value.bookedTime}</div>
     <div class="col col-4" data-label="Payment Status"><button class="pending" value="${value.fEmail}" style="background: ${value.color};"  onclick="pending()">${value.fStatus}</button></div>
   </li>`;
-      mTableDetails.innerHTML += tabelRow;
+        mTableDetails.innerHTML += tabelRow;
+      }
+      if (value.region) {
+        const tabelRow = ` <li class="mtable-row">
+    <div class="col col-1" data-label="Job Id">${value.fEmail}</div>
+    <div class="col col-2" data-label="Customer Name">${value.fName}</div>
+    <div class="col col-3" data-label="Amount">${value.fNumber}</div>
+    <div class="col col-4" data-label="Payment Status">${value.region}</div>
+    <div class="col col-4" data-label="Payment Status"><button class="pending" value="${value.fEmail}" style="background: ${value.color};"  onclick="pending()">${value.fStatus}</button></div>
+  </li>`;
+        mTableDetails.innerHTML += tabelRow;
+      }
     }
   });
 }
