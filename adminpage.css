@@ -1,6 +1,10 @@
 input {
   width: auto !important;
 }
+.dropdown-item {
+  background-color: #555555;
+  color: white;
+}
 .onclick-menu {
   color: aliceblue;
   background: #333;
@@ -106,14 +110,20 @@ h2 {
   margin: 20px 0;
   text-align: center;
 }
+.mresponsive-table {
+  overflow: scroll;
+  white-space: nowrap;
+  padding-left: 0px;
+}
 
 .mresponsive-table li {
   border-radius: 3px;
   padding: 7px 30px;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   margin-bottom: 15px;
+  width: 930px;
 }
 .mresponsive-table .mtable-header {
   background-color: #95a5a6;
@@ -127,41 +137,19 @@ h2 {
   font-size: smaller;
 }
 .mresponsive-table .col-1 {
-  flex-basis: 24%;
+  flex-basis: 23%;
 }
 .mresponsive-table .col-2 {
-  flex-basis: 15%;
+  flex-basis: 20%;
 }
 .mresponsive-table .col-3 {
-  flex-basis: 24%;
+  flex-basis: 22%;
 }
 .mresponsive-table .col-4 {
-  flex-basis: 25%;
+  flex-basis: 18%;
 }
 .mresponsive-table .col-4 {
-  flex-basis: 12%;
-}
-@media only screen and (max-width: 767px) {
-  .mresponsive-table .mtable-header {
-    display: none;
-  }
-  .mresponsive-table li {
-    display: block;
-  }
-  .mresponsive-table .col {
-    flex-basis: 100%;
-  }
-  .mresponsive-table .col {
-    display: flex;
-    padding: 10px 0;
-  }
-  .mresponsive-table .col:before {
-    color: #6c7a89;
-    padding-right: 10px;
-    content: attr(data-label);
-    flex-basis: 50%;
-    text-align: right;
-  }
+  flex-basis: 17%;
 }
 
 /* pagination start */
@@ -271,7 +259,7 @@ make this page look nice. */
   flex-basis: 75%;
 }
 .filter {
-  width: 154%;
+  width: 100%;
 }
 
 .pending {

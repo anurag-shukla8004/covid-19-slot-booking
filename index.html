@@ -22,9 +22,12 @@
       href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
       rel="stylesheet"
     />
-   
+     <!-- add icon link -->
+     <link rel = "icon" href = 
+     "https://www.fedex.com/content/dam/fedex/us-united-states/About/images/Icon_Vaccine.png" 
+             type = "image/x-icon">
     
-    <title>Cowin</title>
+    <title>Vaccine Booking</title>
     <link rel="stylesheet" href="app.css" />
     <link rel="stylesheet" href="booking.css" />
     <link rel="stylesheet" href="adminpage.css">
@@ -44,9 +47,9 @@
           <h1>Start Booking Vaccination</h1>
           <input class="lemail" type="email" placeholder="Email" />
           <input class="lpassword" type="password" placeholder="Password" />
-          <p class="alert" style="display: none">
+          <span class="alert" style="display: none">
             plese enter a correct details
-          </p>
+          </span>
 
           <div class="login-btn mt-4" style="display: flex">
             <button onclick="login()" class="btn-login">Log in</button>
@@ -67,10 +70,10 @@
           <span class="numberalert" style="display: none;">Enter 10 digit number start with 9,8,7 and 6</span>
           <input  class="spassword" type="password" placeholder="Password" />
           <span class="passwordalert" style="display: none;">Minimum 4 character</span>
-          <p class="loginAlert" style="display: none">
+          <span class="loginAlert" style="display: none">
             Fill all required fields
-          </p>
-          <p class="successsinup" style="display: none;">Create your account successful</p>
+          </span>
+          <span class="successsinup" style="display: none;">Create your account successful</span>
 
           <div class="login-btn mt-4">
             <button onclick="store()" onfocus="backCode()" class="btn-login">Sign Up</button>
@@ -93,6 +96,7 @@
       </div>
     </div>
 
+
     <!-- face second start -->
 <div id="web" >
  <!-- navbar start -->
@@ -110,9 +114,15 @@
    margin-bottom: 0px;
    font-size: large;
    color: honeydew;">Profile</a>
-   <ul class="dropdown-menu" style="background: rgb(190, 97, 97);">
-     <li><h5 class="username"></h5></li>
-     <li><h6 class="useremail"></h5></li>
+   <ul class="dropdown-menu" style="background: rgba(85, 85, 85, 0.835);">
+     <li style="background: #555555;"><h5 class="username" style="color: rgb(255, 255, 255);
+          margin: 10px;
+    padding: 10px;
+    background: #555555;"></h5></li>
+     <li style="background: #555555;"><h6 class="useremail" style="color: rgb(255, 255, 255);
+      margin: 10px;
+padding: 10px;
+background: #555555;"></h5></li>
      <li><a class="dropdown-item" onclick="editpopup()"  >Edit profile</a></li>
      <input type="button" value="Logout" class="logout" onclick="logoutPage()"/>
    </ul>
@@ -341,9 +351,15 @@ Though immunity through vaccination is expected to last up to nine months as
      margin-bottom: 0px;
      font-size: large;
      color: honeydew;">Profile</a>
-      <ul class="dropdown-menu" style="background: rgb(190, 97, 97);">
-        <li><h5 class="adminname"></h5></li>
-        <li><h6 class="adminemail"></h5></li>
+       <ul class="dropdown-menu" style="background: rgba(85, 85, 85, 0.835);">
+        <li style="background: #555555;"><h5 class="adminname" style="color: rgb(255, 255, 255);
+          margin: 10px;
+    padding: 10px;
+    background: #555555;"></h5></li>
+         <li style="background: #555555;"><h6 class="adminemail" style="color: rgb(255, 255, 255);
+          margin: 10px;
+    padding: 10px;
+    background: #555555;"></h5></li>
           <li><a class="dropdown-item" onclick="editpopup()"  >Edit profile</a></li>
         <input type="button" value="Logout" class="logout" onclick="logoutPage()"/>
       </ul>

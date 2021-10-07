@@ -4,16 +4,16 @@
   margin: 0px;
   font-size: 34px;
   color: #000;
+  width: 350px;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-inner-spin-,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 body {
-  background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,6 +40,7 @@ p {
 
 span {
   font-size: 12px;
+  color: #c71100;
 }
 
 a {
@@ -50,12 +51,11 @@ a {
 }
 
 button {
-  border-radius: 5px;
   border: 1px solid #dcdcdc;
-  background-color: #3498db;
+  background-color: #29729e;
   color: #fff;
   font-size: 12px;
-  padding: 6px 45px;
+  padding: 8px 55px;
   transition: transform 80ms ease-in;
 }
 
@@ -208,6 +208,16 @@ input {
 .alert {
   color: rgb(255, 5, 5);
   font-weight: 500;
+  padding: 0px;
+  margin-bottom: 0px;
+}
+
+@media only screen and (max-width: 740px) {
+  .seleter h2 {
+    font-size: 19px;
+    text-align: center;
+    padding-top: 6px;
+  }
 }
 
 @media only screen and (max-width: 620px) {
@@ -233,11 +243,32 @@ input {
     display: none;
     width: 56px !important;
   }
+
+  button {
+    border: 1px solid #dcdcdc;
+    background-color: #29729e;
+    color: #fff;
+    font-size: 9px;
+    padding: 6px 40px;
+    transition: transform 80ms ease-in;
+  }
+  span {
+    font-size: 10px;
+  }
+  .seleter h2 {
+    font-size: 14px;
+    text-align: center;
+    padding-top: 6px;
+  }
 }
 
 @media only screen and (max-width: 476px) {
   body {
     font-size: xx-small;
+  }
+
+  p {
+    font-size: 9px;
   }
 
   .project-title {
@@ -246,6 +277,7 @@ input {
     margin: 5px;
     font-size: 34px;
     color: #000;
+    width: 350px;
   }
 
   .login-btn {
@@ -279,6 +311,26 @@ input {
   .scode {
     display: none;
     width: 45px !important;
+  }
+  button {
+    border: 1px solid #dcdcdc;
+    background-color: #29729e;
+    color: #fff;
+    font-size: 8px;
+    padding: 4px 14px;
+    transition: transform 80ms ease-in;
+  }
+  span {
+    font-size: 7px;
+  }
+  .ltitle div h3 {
+    color: #ffffff;
+    font-size: 18px;
+  }
+  .seleter h2 {
+    font-size: 13px;
+    text-align: center;
+    padding-top: 6px;
   }
 }
 /* popup form */

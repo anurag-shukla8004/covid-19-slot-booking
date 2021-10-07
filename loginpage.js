@@ -89,6 +89,12 @@ function backCode() {
     fcode.style.display = "none";
     fNumber.style.width = "300px";
   }
+  if ($(window).width() > 320) {
+    scode.style.display = "none";
+    sinNumebr.style.width = "300px";
+    fcode.style.display = "none";
+    fNumber.style.width = "300px";
+  }
 }
 
 function store() {
