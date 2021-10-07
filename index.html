@@ -73,7 +73,8 @@
           <span class="loginAlert" style="display: none">
             Fill all required fields
           </span>
-          <span class="successsinup" style="display: none;">Create your account successful</span>
+          <span class="successsinup" style="display: none;
+          color: green;">Create your account successful</span>
 
           <div class="login-btn mt-4">
             <button onclick="store()" onfocus="backCode()" class="btn-login">Sign Up</button>
@@ -149,10 +150,10 @@ background: #555555;"></h5></li>
    <p class="eloginAlert" style="display: none">
      Fill all required fields
    </p>
-   <p class="esuccesssinup" style="display: none;">Create your account successful</p>
+   <p class="esuccesssinup" style="display: none; color: green;">Create your account successful</p>
 
    <div class="login-btn mt-4">
-     <button type="button" id="submit" onclick="editProfile()" onfocus="backCode()" class="btn-login">Slot Book</button>
+     <button type="button" id="submit" onclick="editProfile()" onfocus="backCode()" class="btn-login">Edit</button>
    </div>
  </form>
 </div>
@@ -309,18 +310,18 @@ Though immunity through vaccination is expected to last up to nine months as
         <span class="fnamealert" style="display: none;">Enter more than 2 character</span>
         <input class="femail" type="email" placeholder="Email" />
         <input class="fuseremail" type="email" placeholder="Email"  style="display: none;"/>
-        <span class="femailalert1" style="display: none;">Enter more than 1 character</span>
-        <span class="femailalert2" style="display: none;">Enter more than 2 character</span>
+        <span class="femailalert1" style="display: none;">You have entered an invalid email address!</span>
+        <span class="femailalert2" style="display: none;">This email is already used enter a new email</span>
         <div class="d-flex flex-row numberbox">
           <input class="fcode" type="tel"  placeholder="Mobile Number" value="+91" disabled/>
           <input class="fnumber code" type="number" onclick="numberCode2()" placeholder="Mobile Number"/></div>
-        <span class="fnumberalert"  style="display: none;">Enter more than 2 character</span>
+        <span class="fnumberalert"  style="display: none;">Enter 10 digit number start with 9,8,7 and 6</span>
         <input class="fadhar"  type="number" placeholder="12 digit adahar" />
-        <span class="fadharalert" style="display: none;">Enter more than 2 character</span>
+        <span class="fadharalert" style="display: none;">Enter 12 digit number</span>
         <p class="floginAlert" style="display: none">
           Fill all required fields
         </p>
-        <p class="fsuccesssinup" style="display: none;">Create your account successful</p>
+        <p class="fsuccesssinup" style="display: none; color: green;">Create your account successful</p>
 
         <div class="login-btn mt-4">
           <button type="button" id="submit" onclick="add()" onfocus="backCode()" class="btn-login">Slot Book</button>
@@ -384,10 +385,10 @@ Though immunity through vaccination is expected to last up to nine months as
    <p class="eloginAlert2" style="display: none">
      Fill all required fields
    </p>
-   <p class="esuccesssinup2" style="display: none;">Create your account successful</p>
+   <p class="esuccesssinup2" style="display: none; color: green;">Create your account successful</p>
 
    <div class="login-btn mt-4">
-     <button type="button" id="submit" onclick="editProfile2()" onfocus="backCode()" class="btn-login">Slot Book</button>
+     <button type="button" id="submit" onclick="editProfile2()" onfocus="backCode()" class="btn-login">Edit</button>
    </div>
  </form>
 </div>
@@ -437,7 +438,7 @@ Though immunity through vaccination is expected to last up to nine months as
       
     </ul>
    </div>
-   <div id="lpopup">
+   <div id="lpopup" style="z-index: 10;">
      
     <form id="form"  onsubmit="mySubmitFunction(event)">
      <button onclick="hide()" onfocus="backCode()" >CLOSE</button>
@@ -449,8 +450,8 @@ Though immunity through vaccination is expected to last up to nine months as
 
      <div class="afteraccept" style="display: none;"> 
       <h6>Time and Date</h6>
-       <input type="date" class="slotdate"  name="birthdaytime">
-    <input type="time" class="slottime" name="birthdaytime">
+       <input type="date" class="slotdate"  name="birthdaytime" style="width: 192px !important; font-size: medium;">
+    <input type="time" class="slottime" name="birthdaytime" style="width: 192px !important; font-size: medium;">
     </div>
     <div class="afterreject" style="display: none;">
       <h6>Rejection Region</h6>

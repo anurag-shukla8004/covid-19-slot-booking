@@ -79,7 +79,7 @@ function slotDetails() {
     <div class="col col-2" data-label="Customer Name">${value.fName}</div>
     <div class="col col-3" data-label="Amount">${value.fNumber}</div>
     <div class="col col-4" data-label="Payment Status">${value.bookedDate}  ${value.bookedTime}</div>
-    <div class="col col-4" data-label="Payment Status"><button class="pending" value="${value.fEmail}" style="background: ${value.color};"  onclick="pending()">${value.fStatus}</button></div>
+    <div class="col col-4" data-label="Payment Status"><button class="pending" value="${value.fEmail}" style="background: ${value.color}; disabled">${value.fStatus}</button></div>
   </li>`;
         mTableDetails.innerHTML += tabelRow;
       }
@@ -88,8 +88,8 @@ function slotDetails() {
     <div class="col col-1" data-label="Job Id">${value.fEmail}</div>
     <div class="col col-2" data-label="Customer Name">${value.fName}</div>
     <div class="col col-3" data-label="Amount">${value.fNumber}</div>
-    <div class="col col-4" data-label="Payment Status">${value.region}</div>
-    <div class="col col-4" data-label="Payment Status"><button class="pending" value="${value.fEmail}" style="background: ${value.color};"  onclick="pending()">${value.fStatus}</button></div>
+    <div class="col col-4" data-label="Payment Status" style="overflow: scroll;">${value.region}</div>
+    <div class="col col-4" data-label="Payment Status" ><button class="pending" value="${value.fEmail}" style="background: ${value.color};" disabled">${value.fStatus}</button></div>
   </li>`;
         mTableDetails.innerHTML += tabelRow;
       }
@@ -99,7 +99,7 @@ function slotDetails() {
     <div class="col col-2" data-label="Customer Name">${value.fName}</div>
     <div class="col col-3" data-label="Amount">${value.fNumber}</div>
     // <div class="col col-4" data-label="Payment Status">Pending</div>
-    <div class="col col-4" data-label="Payment Status"><button class="pending" value="${value.fEmail}" style="background: ${value.color};"  onclick="pending()">${value.fStatus}</button></div>
+    <div class="col col-4" data-label="Payment Status"><button class="pending" value="${value.fEmail}" style="background: ${value.color};" disabled">${value.fStatus}</button></div>
   </li>`;
         mTableDetails.innerHTML += tabelRow;
       }
