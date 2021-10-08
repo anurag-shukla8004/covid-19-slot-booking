@@ -1,4 +1,9 @@
+function scrollToTop() {
+  window.scrollTo(0, 0);
+}
+
 // localStorage.clear();
+
 $(document).ready(function () {
   $("#signUp").click(function () {
     $("#container").addClass("right-panel-active");
