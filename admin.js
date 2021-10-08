@@ -609,7 +609,7 @@ function editProfile2() {
         fcheckEmail = true;
       } else {
         fcheckEmail = false;
-        let femailAlert2 = document.querySelector(".femailalert2");
+        let femailAlert2 = document.querySelector(".eemailalert22");
         femailAlert2.style.display = "block";
         setTimeout(function () {
           femailAlert2.style.display = "none";
@@ -617,7 +617,7 @@ function editProfile2() {
       }
     } else {
       checkEmail = false;
-      let femailAlert1 = document.querySelector(".eemailalert12");
+      let femailAlert1 = document.querySelector(".eemailalert21");
       femailAlert1.style.display = "block";
       setTimeout(function () {
         femailAlert1.style.display = "none";
@@ -679,7 +679,7 @@ function editProfile2() {
     let data = JSON.parse(localStorage.getItem("Data"));
     localStorage.setItem("DataCopy", JSON.stringify(data));
 
-    let fsuccessSinup = document.querySelector(".fsuccesssinup");
+    let fsuccessSinup = document.querySelector(".esuccesssinup2");
     fsuccessSinup.style.display = "block";
     setTimeout(function () {
       fsuccessSinup.style.display = "none";
