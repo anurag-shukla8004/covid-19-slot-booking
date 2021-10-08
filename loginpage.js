@@ -289,7 +289,10 @@ function login() {
     let str = JSON.parse(localStorage.getItem("nameEmail"));
     adminName.innerText = str[0].pname;
     adminEmail.innerText = str[0].pemai;
+    let booking = JSON.parse(localStorage.getItem("bookingDataCopy"));
+    localStorage.setItem("booking", JSON.stringify(booking));
     filter();
+    Pagination();
     firsttarget();
   }
 }
@@ -469,5 +472,7 @@ function add() {
     document.querySelector(".fadhar").value = "";
     bookingDataCopy = [...bookingData];
     localStorage.setItem("bookingDataCopy", JSON.stringify(bookingDataCopy));
+    booking = [...bookingDataCopy];
+    localStorage.setItem("booking", JSON.stringify(booking));
   }
 }
