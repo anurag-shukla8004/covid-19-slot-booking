@@ -24,44 +24,71 @@ pagination2.addEventListener("click", earsetarget);
 pagination2.addEventListener("click", target);
 // optionSelector.addEventListener("click", selector);
 
-const numberOfItems = bookingData.length;
-const numberPerPage = 5;
-const currentPage = 1;
-const numberOfPages = Math.ceil(numberOfItems / numberPerPage);
+function Pagination() {
+  pagination2.innerHTML = "";
+  let booking = JSON.parse(localStorage.getItem("booking"));
+  const numberOfItems = booking.length;
+  const numberPerPage = 5;
+  const currentPage = 1;
+  const numberOfPages = Math.ceil(numberOfItems / numberPerPage);
 
-// pagination2.innerHTML += `<li class="page-number prev"><a class="apage-number" href="#">&laquo;</a></li>`;
-for (var a = 1; a <= numberOfPages; a++) {
-  const page = `<li class="page-number" id="page-number"><a href="#">${a}</a></li>`;
-  pagination2.innerHTML += page;
+  for (var a = 1; a <= numberOfPages; a++) {
+    const page = `<li class="page-number" id="page-number"><a href="#">${a}</a></li>`;
+    pagination2.innerHTML += page;
+  }
 }
-// pagination2.innerHTML += `<li class="page-number prev"><a href="#">&raquo;</a></li>`;
 
 // sort Name
-bookingDataCopy = [...bookingData];
-localStorage.setItem("bookingDataCopy", JSON.stringify(bookingDataCopy));
-bookingDataCopy.sort((a, b) => {
-  if (a.fName.toLowerCase() < b.fName.toLowerCase()) {
-    return -1;
-  }
-});
+// bookingDataCopy = [...bookingData];
+// localStorage.setItem("bookingDataCopy", JSON.stringify(bookingDataCopy));
+// bookingDataCopy.sort((a, b) => {
+//   if (a.fName.toLowerCase() < b.fName.toLowerCase()) {
+//     return -1;
+//   }
+// });
 
 function firsttarget() {
+  let booking = JSON.parse(localStorage.getItem("booking"));
+  const numberOfItems = booking.length;
+  mTable.innerHTML = "";
+  const numberPerPage = 5;
+  const currentPage = 1;
+  const numberOfPages = Math.ceil(numberOfItems / numberPerPage);
   var i = 1;
   const trimStart = (i - 1) * numberPerPage;
   const trimEnd = trimStart + numberPerPage;
-  var bookingDataCopy = JSON.parse(localStorage.getItem("bookingData"));
-  localStorage.setItem("bookingDataCopy", JSON.stringify(bookingDataCopy));
+
+  booking = JSON.parse(localStorage.getItem("bookingDataCopy"));
+  localStorage.setItem("booking", JSON.stringify(booking));
+
+  if (arrowDown.classList == "active") {
+    console.log("success");
+    booking.sort((a, b) => {
+      if (a.fName.toLowerCase() > b.fName.toLowerCase()) {
+        return -1;
+      }
+    });
+  } else {
+    booking.sort((a, b) => {
+      if (a.fName.toLowerCase() < b.fName.toLowerCase()) {
+        return -1;
+      }
+    });
+  }
+  mTable.innerHTML = "";
+  localStorage.setItem("booking", JSON.stringify(booking));
 
   for (var j = trimStart; trimEnd > j; j++) {
     const tabelRow = ` <li class="mtable-row">
-    <div class="col col-1" data-label="Job Id">${bookingDataCopy[j].fUserEmail}</div>
-    <div class="col col-2" data-label="Customer Name">${bookingDataCopy[j].fName}</div>
-    <div class="col col-3" data-label="Amount">${bookingDataCopy[j].fEmail}</div>
-    <div class="col col-4" data-label="Payment Status">${bookingDataCopy[j].fNumber}</div>
-    <div class="col col-4" data-label="Payment Status"><button class="pending" value="${bookingDataCopy[j].fEmail}" style="background: ${bookingDataCopy[j].color};"  onclick="pending()">${bookingDataCopy[j].fStatus}</button></div>
+    <div class="col col-1" data-label="Job Id">${booking[j].fUserEmail}</div>
+    <div class="col col-2" data-label="Customer Name">${booking[j].fName}</div>
+    <div class="col col-3" data-label="Amount">${booking[j].fEmail}</div>
+    <div class="col col-4" data-label="Payment Status">${booking[j].fNumber}</div>
+    <div class="col col-4" data-label="Payment Status"><button class="pending" value="${booking[j].fEmail}" style="background: ${booking[j].color};"  onclick="pending()">${booking[j].fStatus}</button></div>
   </li>`;
     mTable.innerHTML += tabelRow;
   }
+  Pagination();
 }
 
 function slotDetails() {
@@ -111,18 +138,26 @@ function earsetarget() {
   mTable.innerHTML = "";
 }
 function target(e) {
+  let booking = JSON.parse(localStorage.getItem("booking"));
+  const numberOfItems = booking.length;
+  mTable.innerHTML = "";
+  const numberPerPage = 5;
+  const currentPage = 1;
+  const numberOfPages = Math.ceil(numberOfItems / numberPerPage);
   const item = e.target;
   let i = item.children[0].innerText;
   const trimStart = (i - 1) * numberPerPage;
   const trimEnd = trimStart + numberPerPage;
 
+  booking = JSON.parse(localStorage.getItem("booking"));
+
   for (var j = trimStart; trimEnd > j; j++) {
     const tabelRow = ` <li class="mtable-row">
-  <div class="col col-1" data-label="Job Id">${bookingDataCopy[j].fUserEmail}</div>
-  <div class="col col-2" data-label="Customer Name">${bookingDataCopy[j].fName}</div>
-  <div class="col col-3" data-label="Amount">${bookingDataCopy[j].fEmail}</div>
-  <div class="col col-4" data-label="Payment Status">${bookingDataCopy[j].fNumber}</div>
-  <div class="col col-4" data-label="Payment Status"><button class="pending" value="${bookingDataCopy[j].fEmail}" style="background: ${bookingDataCopy[j].color};"  onclick="pending()">${bookingDataCopy[j].fStatus}</button></div>
+  <div class="col col-1" data-label="Job Id">${booking[j].fUserEmail}</div>
+  <div class="col col-2" data-label="Customer Name">${booking[j].fName}</div>
+  <div class="col col-3" data-label="Amount">${booking[j].fEmail}</div>
+  <div class="col col-4" data-label="Payment Status">${booking[j].fNumber}</div>
+  <div class="col col-4" data-label="Payment Status"><button class="pending" value="${booking[j].fEmail}" style="background: ${booking[j].color};"  onclick="pending()">${booking[j].fStatus}</button></div>
 </li>`;
     mTable.innerHTML += tabelRow;
   }
@@ -301,85 +336,86 @@ function changeFunc() {
   });
   localStorage.setItem("booking", JSON.stringify(booking));
   booking = JSON.parse(localStorage.getItem("booking"));
-  booking.map((value, index) => {
-    if (booking[index].fUserEmail == selectedValue) {
-      const tabelRow = ` <li class="mtable-row">
+  book = [...bookingData];
+  if (selectedValue !== "All") {
+    var sort = book.filter((value) => {
+      if (value.fUserEmail == selectedValue) {
+        return value;
+      }
+    });
+    if (arrowDown.classList == "active") {
+      console.log("success");
+      sort.sort((a, b) => {
+        if (a.fName.toLowerCase() > b.fName.toLowerCase()) {
+          return -1;
+        }
+      });
+    } else {
+      sort.sort((a, b) => {
+        if (a.fName.toLowerCase() < b.fName.toLowerCase()) {
+          return -1;
+        }
+      });
+    }
+    localStorage.setItem("booking", JSON.stringify(sort));
+
+    booking = JSON.parse(localStorage.getItem("booking"));
+    booking.map((value, index) => {
+      if (booking[index].fUserEmail == selectedValue) {
+        const tabelRow = ` <li class="mtable-row">
       <div class="col col-1" data-label="Job Id">${booking[index].fUserEmail}</div>
       <div class="col col-2" data-label="Customer Name">${booking[index].fName}</div>
       <div class="col col-3" data-label="Amount">${booking[index].fEmail}</div>
       <div class="col col-4" data-label="Payment Status">${booking[index].fNumber}</div>
       <div class="col col-4" data-label="Payment Status"><button class="pending" value="${booking[index].fEmail}" style="background: ${booking[index].color};"  onclick="pending()">${booking[index].fStatus}</button></div>
     </li>`;
-      mTable.innerHTML += tabelRow;
-    }
-  });
-  if (selectedValue == "All") {
-    localStorage.setItem("booking", JSON.stringify(bookingDataCopy));
-
-    if (arrowDown.classList == "active") {
-      console.log("success");
-      booking.sort((a, b) => {
-        if (a.fName.toLowerCase() > b.fName.toLowerCase()) {
-          return -1;
-        }
-      });
-      mTable.innerHTML = "";
-      localStorage.setItem("booking", JSON.stringify(booking));
-    }
-    booking = JSON.parse(localStorage.getItem("booking"));
-    booking.map((value, index) => {
-      const tabelRow = ` <li class="mtable-row">
-        <div class="col col-1" data-label="Job Id">${booking[index].fUserEmail}</div>
-        <div class="col col-2" data-label="Customer Name">${booking[index].fName}</div>
-        <div class="col col-3" data-label="Amount">${booking[index].fEmail}</div>
-        <div class="col col-4" data-label="Payment Status">${booking[index].fNumber}</div>
-        <div class="col col-4" data-label="Payment Status"><button class="pending" value="${booking[index].fEmail}" style="background: ${booking[index].color};"  onclick="pending()">${booking[index].fStatus}</button></div>
-      </li>`;
-      mTable.innerHTML += tabelRow;
-      // localStorage.setItem("booking", JSON.stringify(bookingDataCopy));
+        mTable.innerHTML += tabelRow;
+      }
     });
+    Pagination();
+  }
+  // allllll
+  if (selectedValue == "All") {
+    // mTable.innerHTML = "";
+    // var booking = JSON.parse(localStorage.getItem("bookingDataCopy"));
+    // localStorage.setItem("booking", JSON.stringify(bookingDataCopy));
+
+    // if (arrowDown.classList == "active") {
+    //   console.log("success");
+    //   booking.sort((a, b) => {
+    //     if (a.fName.toLowerCase() > b.fName.toLowerCase()) {
+    //       return -1;
+    //     }
+    //   });
+    // } else {
+    //   booking.sort((a, b) => {
+    //     if (a.fName.toLowerCase() < b.fName.toLowerCase()) {
+    //       return -1;
+    //     }
+    //   });
+    // }
+    // mTable.innerHTML = "";
+    // localStorage.setItem("booking", JSON.stringify(booking));
+
+    // booking = JSON.parse(localStorage.getItem("booking"));
+    // booking.map((value, index) => {
+    //   const tabelRow = ` <li class="mtable-row">
+    //     <div class="col col-1" data-label="Job Id">${booking[index].fUserEmail}</div>
+    //     <div class="col col-2" data-label="Customer Name">${booking[index].fName}</div>
+    //     <div class="col col-3" data-label="Amount">${booking[index].fEmail}</div>
+    //     <div class="col col-4" data-label="Payment Status">${booking[index].fNumber}</div>
+    //     <div class="col col-4" data-label="Payment Status"><button class="pending" value="${booking[index].fEmail}" style="background: ${booking[index].color};"  onclick="pending()">${booking[index].fStatus}</button></div>
+    //   </li>`;
+    //   mTable.innerHTML += tabelRow;
+    //   // localStorage.setItem("booking", JSON.stringify(bookingDataCopy));
+    // });
+    // Pagination();
+    firsttarget();
   }
 }
 
 function sortName() {
-  const item = this.event.target;
-  var selectBox = document.getElementById("selectBox");
-  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-
-  if (selectedValue !== "All") {
-    var sort = bookingDataCopy.filter((value) => {
-      if (value.fUserEmail == selectedValue) {
-        return value;
-      }
-    });
-    localStorage.setItem("booking", JSON.stringify(sort));
-  } else {
-    localStorage.setItem("booking", JSON.stringify(bookingDataCopy));
-  }
-  let booking = [];
-  booking = JSON.parse(localStorage.getItem("booking"));
-
-  if (arrowDown.classList == "active") {
-    console.log("success");
-    booking.sort((a, b) => {
-      if (a.fName.toLowerCase() > b.fName.toLowerCase()) {
-        return -1;
-      }
-    });
-    mTable.innerHTML = "";
-    localStorage.setItem("booking", JSON.stringify(booking));
-    changeFunc();
-    console.log("decending");
-  } else {
-    booking.sort((a, b) => {
-      if (a.fName.toLowerCase() < b.fName.toLowerCase()) {
-        return -1;
-      }
-    });
-    mTable.innerHTML = "";
-    localStorage.setItem("booking", JSON.stringify(booking));
-    changeFunc();
-  }
+  changeFunc();
 }
 
 function editpopup() {
@@ -689,6 +725,6 @@ if (localStorage.getItem("pageUpdateData")) {
     adminName.innerText = str[0].pname;
     adminEmail.innerText = str[0].pemai;
     filter();
-    firsttarget();
+    changeFunc();
   }
 }
